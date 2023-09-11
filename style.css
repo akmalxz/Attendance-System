@@ -1,0 +1,90 @@
+/* Global styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e0e0e0;
+}
+
+/* Navbar styles */
+.navbar {
+    background-color: #0c0b0b;
+}
+
+.navbar-brand {
+    font-size: 1.0rem;
+    color: #ffffff;
+}
+
+/* Position the logo at the right corner of the header */
+.logo {
+    position: absolute;
+    top: 50%;
+    right: 30px; /* Adjust the right distance as needed */
+    transform: translateY(-50%);
+    max-height: 70px; /* Adjust the logo's max height as needed */
+}
+
+/* Set the background image */
+body {
+    background-image: url('background.jpg'); /* Replace 'background.jpg' with your image file path */
+    background-repeat: no-repeat;
+    background-size: cover; /* Adjust this property as needed */
+    background-attachment: fixed;
+}
+
+/* Card styles */
+.card {
+    margin-top: 2rem;
+    border: none;
+    border-radius: 0.5rem;
+    box-shadow: 0px 0px 10px rgba(175, 53, 53, 0.2);
+    background-color: #ffffff;
+}
+
+.card-header {
+    background-color: #000000;
+    color: #ffffff;
+    font-size: 1.25rem;
+}
+
+.card-body {
+    padding: 1rem;
+}
+
+/* Form styles */
+.form-label {
+    font-weight: bold;
+}
+
+.form-control {
+    margin-bottom: 1rem;
+}
+
+.btn-primary {
+    background-color: #060708;
+    border: none;
+}
+
+/* Container styles */
+.container-fluid {
+    padding: 2rem;
+}
+
+/* Colorful elements */
+.btn-primary {
+    background-color: #0941dd; /* Orange */
+}
+
+.btn-primary:hover {
+    background-color: #0d0d0f; /* Lighter Orange on Hover */
+}
+
+.card {
+    background-color: #000000bd; /* Light Gray */
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .card {
+        width: 100%;
+    }
+}
