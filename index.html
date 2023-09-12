@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <title>ATTENDANCE SYSTEM test</title>
+    <title>ATTENDANCE SYSTEM</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </head>
@@ -34,7 +34,7 @@
                             <div class="mb-2">
                                 <label for="time" class="form-label">Date - Time</label>
                                 <div type="datetime-local" class="form-control" name="dateTime" id="dateTime" disabled readonly></div>
-                                <button type="submit" class="btn btn-primary mt-2" id="getDateTimeBtn" name="getDateTimeBtn">Check-In Date Time</button>
+                                <button type="submit" class="btn btn-primary mt-2" id="getDateTimeBtn" name="getDateTimeBtn">Refresh Date-Time</button>
                             </div>
                             <!-- LOCATION -->
                             <div class="form-label">Latitude and Longitude</div>
@@ -91,6 +91,10 @@
             var latitudeInput = document.getElementById('latitude').value;
             var longitudeInput = document.getElementById('longitude').value;
 
+            // Create a date object based on input
+            var dateTime = new Date(dateTimeInput);
+            var timestamp = firebase.firestore.Timestamp.fromDate(dateTime);
+
             var coordinates = {
                 latitude: latitudeInput,
                 longitude: longitudeInput
@@ -105,9 +109,6 @@
             const checkRadius = isWithinRadius(centerLat, centerLon, targetLat, targetLon, radiusKm);
 
             if (checkRadius){
-                // Create a date object based on input
-                var dateTime = new Date(dateTimeInput);
-                var timestamp = firebase.firestore.Timestamp.fromDate(dateTime);
 
                 // Add data to Firestore
                 db.collection('attendance').add({
@@ -180,9 +181,9 @@
             }
 
             var currentDate = new Date();
-
+            const malaysiaTimeZone = 'Asia/Kuala_Lumpur';
             // Format the timestamp as desired (e.g., toLocaleString for a user-friendly format)
-            var formattedTimestamp = currentDate.toLocaleString();
+            var formattedTimestamp = currentDate.toLocaleString('en-US', { timeZone: malaysiaTimeZone });
 
             // Update the content of the HTML element
             document.getElementById('dateTime').textContent = formattedTimestamp;
