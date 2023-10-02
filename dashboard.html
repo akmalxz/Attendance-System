@@ -20,10 +20,10 @@
             </a>
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                <a class="nav-link active" aria-current="page" href="dashboard.html">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="login.html">Login</a>
+                <a class="nav-link" href="#">Attendance System</a>
               </li>
             </ul>
             <a class="d-flex">
@@ -34,43 +34,49 @@
     </nav>
 
     <div class="container-fluid">
-        <div class="d-flex justify-content-center">
-            <div class="card mt-3" style="width: 30rem;">
-                <h5 class="card-header">ATTENDANCE SYSTEM</h5>
+        
+        <div class="card card-header-pills m-3 ms-1 p-2">
+            <h2>Attendance Records for 2023</h2>
+        </div>
+
+        <div class="row">
+            <div class="card ms-3" style="width: 15rem;">
                 <div class="card-body">
-                    <form id="attdForm" class="form-control">
-                        <div class="row">
-                            <!-- NAME -->
-                            <div class="mb-2">
-                                <label class="form-label" for="name">Name</label>
-                                <input type="text" class="form-control" id="name" name="name" required>
-                            </div>
-                            <!-- DATE TIME -->
-                            <div class="mb-2">
-                                <label for="time" class="form-label">Date - Time</label>
-                                <div type="datetime-local" class="form-control" name="dateTime" id="dateTime" disabled readonly></div>
-                                <button type="submit" class="btn btn-primary mt-2" id="getDateTimeBtn" name="getDateTimeBtn">Refresh Date - Time</button>
-                            </div>
-                            <!-- LOCATION -->
-                            <div class="form-label">Latitude and Longitude</div>
-                            <div class="input-group my-2">
-                                <input type="double" class="form-control" name="latitude" id="latitude" disabled readonly>
-                                <input type="double" class="form-control" name="longitude" id="longitude" disabled readonly>
-                            </div>
-                            <div class="mb-2">
-                                <!-- <button type="submit" class="btn btn-primary" style="width: max-content;" id="getLocationBtn" name="getLocationBtn">Check-In Location</button> -->
-                            </div>
-                            <!-- SUBMIT BUTTON -->
-                            <div class="my-3 d-flex justify-content-end">
-                                <button type="submit" class="btn btn-primary" id="submitAttendance" name="submitAttendance">SUBMIT</button>
-                            </div>
-                        </div>
-                        
-                    </form>
-                    
+                    <h2>July</h2>
+
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"> In Office - 25 </li> 
+                        <li class="list-group-item"> Work From Home - 3 </li>
+                        <li class="list-group-item"> Registra - 2 </li> 
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card ms-3" style="width: 15rem;">
+                <div class="card-body">
+                    <h2>August</h2>
+
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"> In Office - 25 </li> 
+                        <li class="list-group-item"> Work From Home - 3 </li>
+                        <li class="list-group-item"> Registra - 2 </li> 
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card ms-3" style="width: 15rem;">
+                <div class="card-body">
+                    <h2>September</h2>
+
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"> In Office - 25 </li> 
+                        <li class="list-group-item"> Work From Home - 3 </li>
+                        <li class="list-group-item"> Registra - 2 </li> 
+                    </ul>
                 </div>
             </div>
         </div>
+
     </div>
 
     <!-- Add Firebase SDK -->

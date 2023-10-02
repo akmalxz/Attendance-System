@@ -5,7 +5,7 @@ body {
 }
 /* Set the background image */
 body {
-    background-image: url('bg.png'); /* Replace 'background.jpg' with your image file path */
+    background-image: url('images/bg.png'); /* Replace 'background.jpg' with your image file path */
     background-repeat: no-repeat;
     background-size: cover; /* Adjust this property as needed */
     background-attachment: fixed;
