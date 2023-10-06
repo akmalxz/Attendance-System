@@ -7,6 +7,7 @@
     <title>Attendance System</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -53,8 +54,9 @@
                         <li class="list-group-item"> Registra - 2 </li> 
                     </ul>
 
-                    <div class="row justify-content-end m-2">
-                        <button class="btn btn-primary">Download</button>
+                    <div class="m-1">
+                        <button class="btn btn-primary" onclick="fetchDataAndDisplay()">Display</button>
+                        <button class="btn btn-primary" onclick="exportToExcel()">Download</button>
                     </div>
                 </div>
             </div>
@@ -94,9 +96,27 @@
 
     </div>
 
+    <div class="container-fluid">
+        <table class="table table-striped table-light mx-1 mt-5">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Latitude</th>
+                    <th scope="col">Longitude</th>
+                    <th scope="col-2">Timestamp</th>
+                </tr>
+            </thead>
+            <tbody id="dataTableBody">
+                <!-- Data will be displayed here -->
+            </tbody>
+        </table>
+    </div>
+
     <!-- Add Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
+
     <script src="script.js"></script>
 
     <!-- Firebase configuration -->
@@ -116,6 +136,48 @@
 
         // Create a Firestore reference
         var db = firebase.firestore();
+
+        function exportToExcel() {
+            const data = []; // Populate this array with your data
+            const ws = XLSX.utils.json_to_sheet(data);
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
+            const filename = "data.xlsx";
+            XLSX.writeFile(wb, filename);
+        }
+
+        // Function to retrieve and display data
+        function fetchDataAndDisplay() {
+            const db = firebase.firestore();
+            const dataTableBody = document.getElementById("dataTableBody");
+
+            // Clear existing table data
+            dataTableBody.innerHTML = "";
+
+            // Reference to your Firestore collection
+            const collectionRef = db.collection("attendance");
+
+            // Get documents from the collection
+            collectionRef.get()
+                .then((querySnapshot) => {
+                    querySnapshot.forEach((doc) => {
+                        // Access individual document data
+                        const data = doc.data();
+
+                        // Create a table row for each document
+                        const row = dataTableBody.insertRow();
+                        row.insertCell(0).textContent = data.name;
+                        row.insertCell(1).textContent = data.coordinates.latitude;
+                        row.insertCell(2).textContent = data.coordinates.longitude;
+                        row.insertCell(3).textContent = data.timestamp.toDate().toLocaleString();
+                    });
+                })
+                .catch((error) => {
+                    console.error("Error retrieving data: ", error);
+                });
+        }
+
+
     </script>
 </body>
 </html>
