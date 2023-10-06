@@ -96,6 +96,10 @@
 
     </div>
 
+    <div id="loadingIndicator" class="loading">
+        <p>Loading...</p>
+    </div>    
+
     <div class="container-fluid">
         <table class="table table-striped table-light mx-1 mt-5">
             <thead>
@@ -137,15 +141,6 @@
         // Create a Firestore reference
         var db = firebase.firestore();
 
-        function exportToExcel() {
-            const data = []; // Populate this array with your data
-            const ws = XLSX.utils.json_to_sheet(data);
-            const wb = XLSX.utils.book_new();
-            XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
-            const filename = "data.xlsx";
-            XLSX.writeFile(wb, filename);
-        }
-
         // Function to retrieve and display data
         function fetchDataAndDisplay() {
             const db = firebase.firestore();
@@ -177,6 +172,55 @@
                 });
         }
 
+        // Function to export data to Excel
+        //function exportToExcel() {
+            //const data = []; // Populate this array with your data
+            //const ws = XLSX.utils.json_to_sheet(data);
+            //const wb = XLSX.utils.book_new();
+            //XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
+            //const filename = "data.xlsx";
+            //XLSX.writeFile(wb, filename);
+        //}
+
+        // Function to export data to Excel
+        async function exportToExcel() {
+
+            fetchDataAndDisplay();
+
+            showLoadingIndicator();
+            await pause(2000);
+            hideLoadingIndicator();
+
+            // Get the table element by its ID
+            const table = document.querySelector("table");
+
+            // Create a worksheet
+            const ws = XLSX.utils.table_to_sheet(table);
+
+            // Create a new workbook and add the worksheet
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
+
+            const filename = "data.xlsx";
+            XLSX.writeFile(wb, filename)
+        }
+
+        function pause(milliseconds) {
+            return new Promise((resolve) => {
+                setTimeout(resolve, milliseconds);
+            });
+        }
+
+        function showLoadingIndicator() {
+            const loadingIndicator = document.getElementById("loadingIndicator");
+            loadingIndicator.style.display = "block";
+        }
+
+        // Function to hide the loading indicator
+        function hideLoadingIndicator() {
+            const loadingIndicator = document.getElementById("loadingIndicator");
+            loadingIndicator.style.display = "none";
+        }
 
     </script>
 </body>
