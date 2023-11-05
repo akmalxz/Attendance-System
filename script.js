@@ -1,4 +1,3 @@
-
 var firebaseConfig = {
     apiKey: "AIzaSyCXsIto8VwJBZsNqMV-6biuvlTYeA5BNes",
     authDomain: "otc-attendance-system.firebaseapp.com",
