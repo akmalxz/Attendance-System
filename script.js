@@ -15,7 +15,6 @@ firebase.initializeApp(firebaseConfig);
 // Create a Firestore reference
 var db = firebase.firestore();
 
-
 attdForm.addEventListener('submit', function(event){
     event.preventDefault();
 
